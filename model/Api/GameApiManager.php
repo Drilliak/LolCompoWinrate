@@ -20,6 +20,7 @@ class GameApiManager extends ApiManager
     /**
      * Renvoie tous les joueurs ayant participé aux parties récentes de l'invocateur
      * identifié par l'id contenu dans la classe.
+     * @return un tableau contenant les id des invocateurs.
      */
     public function getParticipants(){
 
@@ -37,6 +38,6 @@ class GameApiManager extends ApiManager
                }
            }
         }
-        var_dump($summonersIds);
+        return $summonersIds;
     }
 }

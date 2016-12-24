@@ -1,8 +1,8 @@
 <?php
  require './model/Autoload.php';
 
-$db  = DbFactory::getConnection();
 
-$manager = new GameApiManager(29563141);
+$sumMana = new SummonerApiManager();
+$man = new GameApiManager(29563141 );
 
-$manager->getParticipants();
+var_dump($sumMana->getSummonerName($man->getParticipants()));
