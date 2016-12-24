@@ -1,8 +1,6 @@
 <?php
  require './model/Autoload.php';
 
+$manager = new GameApiManager(29563141);
 
-$sumMana = new SummonerApiManager();
-$man = new GameApiManager(29563141 );
-
-var_dump($sumMana->getSummonerName($man->getParticipants()));
+var_dump($manager->getMatchIds());

@@ -40,4 +40,16 @@ class GameApiManager extends ApiManager
         }
         return $summonersIds;
     }
+
+    public function getMatchIds(){
+        if (is_null($this->content)){
+            $url = $this->builder->getRecentGamesUrl($this->summonerId);
+            $this->loadContent($url);
+        }
+        $gamesIds = array();
+        foreach ($this->content->{"games"} as $game){
+            array_push($gamesIds, $game->{'gameId'});
+        }
+        return $gamesIds;
+    }
 }
