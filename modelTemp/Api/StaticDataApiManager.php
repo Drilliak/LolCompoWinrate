@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Vincent
  * Date: 24/12/2016
- * Time: 01:57
+ * Time: 01:57 c
  */
 class StaticDataApiManager extends ApiManager
 {
