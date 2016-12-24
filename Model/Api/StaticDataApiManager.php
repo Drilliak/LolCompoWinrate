@@ -1,9 +1,4 @@
 <?php
-
-require_once "ApiManager.php";
-require_once "StaticDataUrlBuilder.php";
-require_once "../Champion.php";
-
 /**
  * Created by PhpStorm.
  * User: Vincent

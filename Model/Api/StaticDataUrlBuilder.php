@@ -1,6 +1,5 @@
 <?php
 
-require_once "UrlBuilder.php";
 /**
  * User: Vincent
  * Date: 24/12/2016

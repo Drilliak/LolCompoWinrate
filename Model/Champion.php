@@ -10,8 +10,8 @@
 class Champion
 {
 
-    private $id;
-    private $name;
+    var $id;
+    var $name;
 
 
     // Setters
@@ -26,6 +26,13 @@ class Champion
         $this->name = $name;
     }
 
+    public function getId(){
+        return $this->id;
+    }
+
+    public function getName(){
+        return $this->name;
+    }
     public function __construct(array $data)
     {
         $this->hydrate($data);

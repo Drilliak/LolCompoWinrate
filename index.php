@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Compo stats</title>
-</head>
-<body>
-	<p>Super site un peu trop cheaté qui va nous rendre riche</p>
-</body>
-</html>
+<?php
+ require './model/Autoload.php';
+
+$db  = DbFactory::getConnection();
+
+ $manager = new ChampionManager($db);
+
+ $manager->fillChampionDatabase();
