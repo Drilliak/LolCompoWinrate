@@ -9,6 +9,7 @@ class StaticDataUrlBuilder extends UrlBuilder
 {
     public function __construct()
     {
+        parent::__construct();
         $this->version = "v1.2";
         $this->baseUrl = "/api/lol/static-data/";
     }

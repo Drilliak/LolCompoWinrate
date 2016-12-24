@@ -3,6 +3,6 @@
 
 $db  = DbFactory::getConnection();
 
- $manager = new ChampionManager($db);
+$manager = new GameApiManager(29563141);
 
- $manager->fillChampionDatabase();
+$manager->getParticipants();

@@ -10,7 +10,7 @@ class ApiManager{
 
 
 	public function loadContent($url){
-		$this->content = file_get_contents($url);
+		$this->content = json_decode(file_get_contents($url));
 	}
 
 	public function getContent(){

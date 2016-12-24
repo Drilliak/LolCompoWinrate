@@ -21,7 +21,7 @@ class StaticDataApiManager extends ApiManager
     {
         $url = $this->builder->getChampionUrl();
         $this->loadContent($url);
-        $json = json_decode($this->content)->{'data'};
+        $json = $this->content->{'data'};
 
         $championTab = array();
         foreach ($json as $champion) {
