@@ -104,7 +104,7 @@ class DefaultApiUrlBuilder implements ApiUrlBuilder
             $this->fields["region"] = $region;
             $this->fields["protocol"] = self::PROTOCOL;
             $this->fields["domain"] = self::DOMAIN_NAME;
-            $this->fields["version"] = $this->riotApiVersion[$section];
+            $this->fields["api_version"] = $this->riotApiVersion[$section];
         } else {
             throw new Exception("Method " . $methodName . " not supported");
         }
@@ -123,6 +123,53 @@ class DefaultApiUrlBuilder implements ApiUrlBuilder
     public function withSummonerIds(array $summonerIds) : ApiUrlBuilder{
         return $this;
     }
+
+    /**
+     * @see ApiUrlBuilder::withChampData()
+     */
+    public function withChampData(string $tag): ApiUrlBuilder
+    {
+        $acceptedTags = array("all", "allytips", "altimages", "blurb", "ennemytips", "image", "info", "lore",
+            "partype", "passsive", "recommended", "skins", "spells", "stats", "tags"
+        );
+        if (in_array($tag, $acceptedTags)){
+            $this->parameters["champData"] = $tag;
+        }
+        return $this;
+    }
+
+    /**
+     * @see ApiUrlBuilder::withDataById()
+     */
+    public function withDataById(): ApiUrlBuilder
+    {
+        $this->parameters["dataById"] = "true";
+        return $this;
+    }
+
+    /**
+     * @see ApiUrlBuilder::withoutDataById()
+     */
+    public function withoutDataById(): ApiUrlBuilder
+    {
+        $this->parameters["dataById"] = "false";
+        return $this;
+    }
+
+    /**
+     * @see ApiUrlBuilder::withVersion()
+     */
+    public function withVersion(string $version): ApiUrlBuilder
+    {
+        $this->parameter["version"] = $version;
+        return $this;
+     }
+
+     public function withLocale(string $locale): ApiUrlBuilder
+     {
+         $this->parameters["locale"] = $locale;
+         return $this;
+     }
 
     /**
      * @see ApiUrlBuilder::buildUrl()
