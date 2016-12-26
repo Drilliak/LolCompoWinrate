@@ -63,15 +63,18 @@ class DefaultApiUrlBuilder implements ApiUrlBuilder
      */
     private $riotApiUrls;
 
+    private $simpleRiotApiUrls;
+
     /**
      * @var array
      *          tableau associatif contenant les noms des sections de l'api en clé, et versions et valeur;
      */
     private $riotApiVersion;
 
-    public function __construct(string $methodName, string $applicationId, string $region = "euw"){
+    public function __construct(string $methodName, string $applicationId, string $region){
         try{
             $this->riotApiUrls = parse_ini_file(self::API_URLS_FILE, true);
+            $this->simpleRiotApiUrls = parse_ini_file(self::API_URLS_FILE);
         } catch (Exception $e){
             exit("An error occured while loading urls");
         }
@@ -112,64 +115,44 @@ class DefaultApiUrlBuilder implements ApiUrlBuilder
     /**
      * @see ApiUrlBuilder::withId()
      */
-    public function withSummonerId(int $summonerId) : ApiUrlBuilder{
-        $this->fields["summonerId"] = $summonerId;
+    public function withId(int $id) : ApiUrlBuilder{
+        $this->fields["id"] = $id;
         return $this;
     }
 
     /**
      * @see ApiUrlBuilder::withIds()
      */
-    public function withSummonerIds(array $summonerIds) : ApiUrlBuilder{
+    public function withIds(array $ids) : ApiUrlBuilder{
         return $this;
     }
 
     /**
-     * @see ApiUrlBuilder::withChampData()
+     * @see ApiUrlBuilder::withMethod()
      */
-    public function withChampData(string $tag): ApiUrlBuilder
+    public function withMethod(string $methodName): ApiUrlBuilder
     {
-        $acceptedTags = array("all", "allytips", "altimages", "blurb", "ennemytips", "image", "info", "lore",
-            "partype", "passsive", "recommended", "skins", "spells", "stats", "tags"
-        );
-        if (in_array($tag, $acceptedTags)){
-            $this->parameters["champData"] = $tag;
+        if (array_key_exists($methodName, $this->simpleRiotApiUrls)){
+            $this->urlFormat = $this->simpleRiotApiUrls[$methodName];
+        } else {
+            throw new Exception("Method " . $methodName . " not supported");
         }
+
         return $this;
     }
 
     /**
-     * @see ApiUrlBuilder::withDataById()
+     * @see ApiUrlBuilder::withParameter()
      */
-    public function withDataById(): ApiUrlBuilder
+    public function withParameter(string $name, string $value): ApiUrlBuilder
     {
-        $this->parameters["dataById"] = "true";
+        if (!is_null($value) && strlen($value) >0 ){
+            $this->parameters[$name] = urlencode($value);
+        }
+
         return $this;
     }
 
-    /**
-     * @see ApiUrlBuilder::withoutDataById()
-     */
-    public function withoutDataById(): ApiUrlBuilder
-    {
-        $this->parameters["dataById"] = "false";
-        return $this;
-    }
-
-    /**
-     * @see ApiUrlBuilder::withVersion()
-     */
-    public function withVersion(string $version): ApiUrlBuilder
-    {
-        $this->parameter["version"] = $version;
-        return $this;
-     }
-
-     public function withLocale(string $locale): ApiUrlBuilder
-     {
-         $this->parameters["locale"] = $locale;
-         return $this;
-     }
 
     /**
      * @see ApiUrlBuilder::buildUrl()

@@ -9,15 +9,18 @@
 interface ApiProvider
 {
     /**
-     * Creates the api url builder.
+     * Crée
      *
      * @param string $methodName
-     *                  the method name
+     *                  le nom de la méthode
      * @param string $applicationKey
-     *                  the application key
+     *                  la clé de l'application
+     * @param string $region
+     *                  la région
      * @return ApiUrlBuilder the api url builder
      */
     public function createApiUrlBuilder(string $methodName,
-                                        string $applicationKey) : ApiUrlBuilder;
+                                        string $applicationKey,
+                                        string $region) : ApiUrlBuilder;
 
 }

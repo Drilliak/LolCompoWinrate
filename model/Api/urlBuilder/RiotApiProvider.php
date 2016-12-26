@@ -12,9 +12,10 @@ class RiotApiProvider implements ApiProvider
      * @see ApiProvider::createApiUrlBuilder()
      */
     public function createApiUrlBuilder(string $methodName,
-                                        string $applicationKey) : ApiUrlBuilder
+                                        string $applicationKey,
+                                        string $region) : ApiUrlBuilder
     {
-        return new DefaultApiUrlBuilder($methodName, $applicationKey);
+        return new DefaultApiUrlBuilder($methodName, $applicationKey, $region);
     }
 
 }

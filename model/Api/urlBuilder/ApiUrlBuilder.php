@@ -11,82 +11,40 @@ interface ApiUrlBuilder
     /**
      * Avec l'id
      *
-     * @param int $summonerId
-     *                  l'id de l'invocateur
+     * @param int $id
+     *                  l'id
      * @return ApiUrlBuilder
      *          l'objet permettant de construire l'url.
      */
-    public function withSummonerId(int $summonerId) : ApiUrlBuilder;
+    public function withId(int $id) : ApiUrlBuilder;
 
     /**
-     * @param array $summonerIds
-     *                  tableaux des ids des invocateurs.
+     * @param array $ids
+     *                  tableaux des ids
      * @return ApiUrlBuilder
      *          l'objet permettant de construire l'url.
      */
-    public function withSummonerIds(array $summonerIds) : ApiUrlBuilder;
+    public function withIds(array $ids) : ApiUrlBuilder;
 
     /**
-     * Avec le paramètre champData
-     *
-     * @param string $tag
-     *                  tags acceptés :
-     *                  <ul>
-     *                      <li>all</li>
-     *                      <li>allytips</li>
-     *                      <li>alltimages</li>
-     *                      <li>blurb</li>
-     *                      <li>enemytips</li>
-     *                      <li>image</li>
-     *                      <li>info</li>
-     *                      <li>lore</li>
-     *                      <li>partype</li>
-     *                      <li>passive</li>
-     *                      <li>recommended</li>
-     *                      <li>skins</li>
-     *                      <li>spells</li>
-     *                      <li>stats</li>
-     *                      <li>tags</li>
-     *                  </ul>
+     * Avec la méthode.
+     * @param string $methodName
+     *                  le nom de la méthode
      * @return ApiUrlBuilder
-     *              l'objet permettant de construire l'url.
+     *          l'objet permettant de construire l'url.
      */
-    public function withChampData(string $tag) : ApiUrlBuilder;
+    public function withMethod(string $methodName) : ApiUrlBuilder;
 
     /**
-     * Trie le tableau de retour en utilisant les id comme index.
-     * @return ApiUrlBuilde
-     *              l'objet permettant de construire l'url.
-     */
-    public function withDataById() : ApiUrlBuilder;
-
-    /**
-     * N'utilise pas les id comme index dans le tableau de retourn.
+     * Avec le paramètre.
+     * @param string $name
+     *                  nom du paramètre.
+     * @param string $value
+     *                  nom de la valeur;
      * @return ApiUrlBuilder
-     *              l'objet permettant de construire l'url.
+     *          l'objet permettant de construire l'url.
      */
-    public function withoutDataById(): ApiUrlBuilder;
-
-    /**
-     * Avec la version de données
-     *
-     * @param string $version
-     *                  la data dragon version
-     *
-     * @return ApiUrlBuilder
-     *              l'objet permettant de construire l'url.
-     */
-    public function withVersion(string $version) : ApiUrlBuilder;
-
-    /**
-     * Avec le lieu des données
-     *
-     * @param string $locale
-     *                  le lieu des données
-     * @return ApiUrlBuilder
-     *              l'objet permettant de construire l'url.
-     */
-    public function withLocale(string $locale) : ApiUrlBuilder;
+    public function withParameter(string $name, string $value) : ApiUrlBuilder;
 
     /**
      * Builds the url
