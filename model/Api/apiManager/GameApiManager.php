@@ -30,13 +30,17 @@ class GameApiManager extends ApiManager
         }
         $summonersIds = array();
         foreach ($this->content->{"games"} as $game){
-           $fellowPlayers = $game->{'fellowPlayers'};
-           foreach($fellowPlayers as $player){
-               $summonerId = $player->{"summonerId"};
-               if (!in_array($summonerId, $summonersIds)){
-                   array_push($summonersIds, $summonerId);
+           $gameType = $game->{"subType"};
+           if (in_array($gameType, $this->allowedTypes)){
+               $fellowPlayers = $game->{'fellowPlayers'};
+               foreach($fellowPlayers as $player){
+                   $summonerId = $player->{"summonerId"};
+                   if (!in_array($summonerId, $summonersIds)){
+                       array_push($summonersIds, $summonerId);
+                   }
                }
            }
+
         }
         return $summonersIds;
     }
