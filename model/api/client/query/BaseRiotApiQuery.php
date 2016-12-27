@@ -30,10 +30,6 @@ abstract class BaseRiotApiQuery extends RiotApiGateway implements RiotApiQuery
         $this->reset();
     }
 
-   public function list()
-   {
-       // TODO: Implement list() method.
-   }
 
     public function singleResult()
     {

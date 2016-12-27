@@ -26,6 +26,9 @@ function autoload($classname)
     elseif (file_exists($file = __DIR__ . "\\Api\\urlBuilder\\"  . $classname . ".php")) {
         require $file;
     }
+    elseif (file_exists($file = __DIR__ . "\\Api\\schema\\enum\\"  . $classname . ".php")) {
+        require $file;
+    }
 }
 
 spl_autoload_register('autoload');

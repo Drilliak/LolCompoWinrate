@@ -8,7 +8,5 @@
 
 interface RiotApiQuery extends RiotAuthenticationClient{
 
-    public function list();
-
     public function reset();
 }

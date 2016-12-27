@@ -6,7 +6,7 @@
  * Date: 26/12/2016
  * Time: 18:48
  */
-class ChampionDto
+class ChampionDto extends Schema
 {
     private $allytips;
     private $blurb;
@@ -26,6 +26,11 @@ class ChampionDto
     private $tags;
     private $title;
 
+
+    public function __construct(array $data)
+    {
+        parent::__construct($data);
+    }
 
     public function getAllytips()
     {
@@ -230,21 +235,7 @@ class ChampionDto
         $this->title = $title;
     }
 
-    public function __construct(array $data)
-    {
-        $this->hydrate($data);
-    }
 
-    private function hydrate(array $data)
-    {
-        foreach ($data as $key => $value)
-        {
-            $method = 'set'.ucfirst($key);
-            if (method_exists($this, $method))
-            {
-                $this->$method($value);
-            }
-        }
-    }
+
 
 }

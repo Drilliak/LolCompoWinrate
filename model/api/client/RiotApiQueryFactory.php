@@ -46,8 +46,24 @@ class RiotApiQueryFactory
         return new RiotApiQueryFactory($applicationKey, $region);
     }
 
+    /**
+     *  New static data api query.
+     *
+     * @return StaticDataApiQuery
+     *              the static data api query
+     */
     public function newStaticDataApiQuery() : StaticDataApiQuery{
         return new StaticDataApiQueryImpl($this->applicationKey, $this->region);
+    }
+
+    /**
+     * New game api query.
+     *
+     * @return GameApiQuery
+     *          the game api query.
+     */
+    public function newGameApiQuery() : GameApiQuery {
+        return new GameApiQueryImpl($this->applicationKey, $this->region);
     }
 
 

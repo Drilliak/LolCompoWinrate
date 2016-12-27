@@ -83,7 +83,6 @@ class StaticDataApiQueryImpl extends BaseRiotApiQuery implements StaticDataApiQu
     public function listChampions(): array
     {
         $this->apiUrlBuilder->withMethod(RiotApiMethods::GET_CHAMPIONS);
-        echo $this->apiUrlBuilder->buildUrl();
         $jsonContent = json_decode(file_get_contents($this->apiUrlBuilder->buildUrl()));
         $jsonContent = $jsonContent->{"data"};
         $championsList = array();
