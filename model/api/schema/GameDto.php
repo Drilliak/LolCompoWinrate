@@ -216,7 +216,10 @@ class GameDto extends Schema
 
     public function setSubType(string $subType)
     {
-        $this->subType = $subType;
+        if (SubType::isValidName($subType)){
+            $this->subType = $subType;
+        }
+
     }
 
     public function getTeamId(): int

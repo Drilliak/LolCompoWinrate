@@ -6,9 +6,17 @@
  * Time: 15:25
  */
 abstract class RiotApiGateway{
+
+    /** @var  ApiProvider the api provider */
     private $apiProvider;
+
+    /** @var  string the application key */
     protected $applicationKey;
+
+    /** @var  string the region */
     protected $region;
+
+    /** @var  array request headers */
     protected $requestHeader;
 
 
@@ -83,7 +91,7 @@ abstract class RiotApiGateway{
         return $this->requestHeader;
     }
 
-    public function setRequestHeaders(array $requestHeader) : void{
+    public function setRequestHeaders(array $requestHeader){
         $this->requestHeader = $requestHeader;
     }
 

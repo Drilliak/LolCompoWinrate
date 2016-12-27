@@ -24,7 +24,8 @@ class SummonerApiQueryImpl extends BaseRiotApiQuery implements SummonerApiQuery
     /**
      * @see SummonerApiQuery::withSummonerNames()
      */
-    public function withSummonerNames(array $summonerNames) : SummonerApiQuery{
+    public function withSummonerNames(array $summonerNames): SummonerApiQuery
+    {
         $this->apiUrlBuilder->withFields("names", $summonerNames);
         return $this;
     }
@@ -32,7 +33,8 @@ class SummonerApiQueryImpl extends BaseRiotApiQuery implements SummonerApiQuery
     /**
      * @see SummonerApiQuery::withSummonerName()
      */
-    public function withSummonerName(string $summonerName) : SummonerApiQuery{
+    public function withSummonerName(string $summonerName): SummonerApiQuery
+    {
         $this->apiUrlBuilder->withField("names", $summonerName);
         return $this;
     }
@@ -41,27 +43,25 @@ class SummonerApiQueryImpl extends BaseRiotApiQuery implements SummonerApiQuery
     /**
      * @see SummonerApiQuery::summonersList()
      */
-    public function summonersList() : array{
+    public function summonersList(): array
+    {
         $this->apiUrlBuilder->withMethod(RiotApiMethods::GET_SUMMONER_BY_NAME);
-        $jsonContent = json_decode(file_get_contents($this->apiUrlBuilder->buildUrl()));
+        $url = $this->apiUrlBuilder->buildUrl();
+
+        $jsonContent = json_decode(file_get_contents($url));
         $summonersList = array();
-        foreach($jsonContent as $summoner){
+
+        foreach ($jsonContent as $summoner) {
             $summonerData = array();
-            foreach ($summoner as $key => $value){
+            foreach ($summoner as $key => $value) {
                 $summonerData[$key] = $value;
             }
             array_push($summonersList, new SummonerDto($summonerData));
         }
+
         return $summonersList;
     }
 
-    public function getSummoner() : SummonerDto{
-        $summonersList = $this->summonersList();
-        if (count($summonersList) > 1){
-            die ("Too many parameters");
-        }
-        return $summonersList[0];
-    }
 
     /**
      * @see RiotApiQuery::reset()

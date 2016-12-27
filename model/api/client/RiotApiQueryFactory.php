@@ -20,6 +20,31 @@ class RiotApiQueryFactory
     private $region;
 
     /**
+     * @var SplQueue  Queue for short time limit.
+     */
+    private static $shortLimitQueue;
+
+    /**
+     * @var SplQueue queue for long time limit.
+     */
+    private static $longLimitQueue;
+
+    /** Number of seconds */
+    const LONG_TIME_INTERVAL = 600;
+
+    /** Nubmer of seconds */
+    const SHORT_TIME_INTERVAL = 10;
+
+    /** Requests number for LONG_TIME_INTERVAL */
+    const RATE_LIMIT_LONG = 500;
+
+    /** Requests number for SHORT_TIME_INTERVAL */
+    const RATE_LIMIT_SHORT = 10;
+
+
+
+
+    /**
      * RiotApiQueryFactory constructor.
      * @param string $applicationKey
      *                  clé de l'application.
@@ -75,6 +100,50 @@ class RiotApiQueryFactory
     public function newSummonerApiQuery() : SummonerApiQuery {
         return new SummonerApiQueryImpl($this->applicationKey, $this->region);
     }
+
+    /**
+     * Updates the queue.
+     *
+     * @param SplQueue $queue
+     * @param $interval
+     * @param $rate
+     */
+    private static function updtateLimitQueue(SplQueue $queue, $interval, $rate){
+        while(!$queue->isEmpty()){
+            $timeSinceOldest = microtime(true) - $queue->bottom();
+            if($timeSinceOldest > $interval){
+                $queue->dequeue();
+            }
+            elseif($queue->count() >= $rate){
+                if($timeSinceOldest < $interval){
+
+                    sleep($interval - $timeSinceOldest);
+                }
+            }
+            else {
+                break;
+            }
+        }
+        $queue->enqueue(microtime(true));
+    }
+
+    /**
+     * Waits if a rate limits is exceededs.
+     * Use this function before each query.
+     */
+    public static function wait(){
+        if (!isset(self::$shortLimitQueue)){
+            self::$shortLimitQueue = new SplQueue();
+        }
+        if (!isset(self::$longLimitQueue)){
+            self::$longLimitQueue = new SplQueue();
+        }
+        self::updtateLimitQueue(self::$shortLimitQueue, self::SHORT_TIME_INTERVAL, self::RATE_LIMIT_SHORT);
+        self::updtateLimitQueue(self::$longLimitQueue, self::LONG_TIME_INTERVAL, self::RATE_LIMIT_LONG);
+
+    }
+
+
 
 
 

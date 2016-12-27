@@ -14,7 +14,7 @@ interface RiotCommunicationClient
      * @param array $requestHeaders
      *                  the request headers
      */
-    public function setRequestHeaders(array $requestHeaders) : void;
+    public function setRequestHeaders(array $requestHeaders);
 
     /**
      * Gets the request headers

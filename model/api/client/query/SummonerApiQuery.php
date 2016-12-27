@@ -27,13 +27,6 @@ interface SummonerApiQuery extends RiotApiQuery
      */
     public function withSummonerNames(array $summonerNames) : SummonerApiQuery;
 
-    /**
-     * Retruves the summoner.
-     * @return SummonerDto
-     *              the summoner.
-     *
-     */
-    public function getSummoner() : SummonerDto;
 
     /**
      * Retrieves the summoners.

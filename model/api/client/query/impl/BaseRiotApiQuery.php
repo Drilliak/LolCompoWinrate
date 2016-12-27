@@ -38,4 +38,7 @@ abstract class BaseRiotApiQuery extends RiotApiGateway implements RiotApiQuery
     }
 
 
+
+
+
 }
