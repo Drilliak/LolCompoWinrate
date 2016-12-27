@@ -66,6 +66,16 @@ class RiotApiQueryFactory
         return new GameApiQueryImpl($this->applicationKey, $this->region);
     }
 
+    /**
+     * New summoner api query.
+     *
+     * @return SummonerApiQuery
+     *             the summoner api query.
+     */
+    public function newSummonerApiQuery() : SummonerApiQuery {
+        return new SummonerApiQueryImpl($this->applicationKey, $this->region);
+    }
+
 
 
 }

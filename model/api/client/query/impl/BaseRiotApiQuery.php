@@ -8,6 +8,7 @@
  */
 abstract class BaseRiotApiQuery extends RiotApiGateway implements RiotApiQuery
 {
+    /** @var  ApiUrlBuilder api url builder */
     protected $apiUrlBuilder;
 
     /**

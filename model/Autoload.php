@@ -17,9 +17,6 @@ function autoload($classname)
     elseif (file_exists($file = __DIR__ . "\\Api\\client\\query\\provider\\"  . $classname . ".php")) {
         require $file;
     }
-    elseif (file_exists($file = __DIR__ . "\\Api\\gameConstants\\"  . $classname . ".php")) {
-        require $file;
-    }
     elseif (file_exists($file = __DIR__ . "\\Api\\schema\\"  . $classname . ".php")) {
         require $file;
     }

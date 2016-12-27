@@ -30,6 +30,9 @@ class GameApiQueryImpl extends BaseRiotApiQuery implements GameApiQuery
         return $this;
     }
 
+    /**
+     * @see GameApiQuery::listRecentGames()
+     */
     public function listRecentGames() : array{
         $this->apiUrlBuilder->withMethod(RiotApiMethods::GET_RECENT_GAMES);
         $jsonContent = json_decode(file_get_contents($this->apiUrlBuilder->buildUrl()));

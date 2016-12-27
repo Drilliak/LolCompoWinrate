@@ -46,6 +46,28 @@ interface ApiUrlBuilder
      */
     public function withParameter(string $name, string $value) : ApiUrlBuilder;
 
+
+    /**
+     * With the field.
+     * @param string $name
+     *                  the field name.
+     * @param string $value
+     *                  the field value.
+     * @return ApiUrlBuilder
+     *              the api url builder.
+     */
+    public function withField(string $name, string $value) : ApiUrlBuilder;
+
+    /**
+     * With fields.
+     * @param string $name
+     *                  the field name.
+     * @param array $values
+     *                  the field values.
+     * @return ApiUrlBuilder
+     *          the api url builder.
+     */
+    public function withFields(string $name, array $values) : ApiUrlBuilder;
     /**
      * Builds the url
      *

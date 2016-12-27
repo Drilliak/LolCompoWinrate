@@ -153,6 +153,35 @@ class DefaultApiUrlBuilder implements ApiUrlBuilder
         return $this;
     }
 
+    /**
+     * @see ApiUrlBuilder::withField()
+     */
+    public function withField(string $name, string $value) : ApiUrlBuilder
+    {
+        if (!is_null($value) && strlen($value) >0 ){
+            $this->fields[$name] = $value;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @see ApiUrlBuilder::withFields()
+     */
+    public function withFields(string $name, array $values) : ApiUrlBuilder{
+        if (!is_null($values) && !empty($values)){
+            $builder = "";
+            foreach($values as $value){
+                $builder .= $value;
+                if (next($values) !== false){
+                    $builder .= "%2C";
+                }
+            }
+            $this->fields[$name] = $builder;
+        }
+        return $this;
+    }
+
 
     /**
      * @see ApiUrlBuilder::buildUrl()
