@@ -52,11 +52,7 @@ class SummonerApiQueryImpl extends BaseRiotApiQuery implements SummonerApiQuery
         $summonersList = array();
 
         foreach ($jsonContent as $summoner) {
-            $summonerData = array();
-            foreach ($summoner as $key => $value) {
-                $summonerData[$key] = $value;
-            }
-            array_push($summonersList, new SummonerDto($summonerData));
+            array_push($summonersList, JsonParser::fromJson($summoner, "SummonerDto"));
         }
 
         return $summonersList;

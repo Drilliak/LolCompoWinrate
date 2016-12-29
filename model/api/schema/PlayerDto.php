@@ -1,10 +1,7 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Vincent
- * Date: 26/12/2016
- * Time: 21:58
+ * This object contains player information.
  */
 class PlayerDto extends Schema
 {
@@ -14,7 +11,7 @@ class PlayerDto extends Schema
     private $championId;
 
     /**
-     * @var int Summoner id associated with player.
+     * @var float Summoner id associated with player.
      */
     private $summonerId;
 
@@ -46,13 +43,13 @@ class PlayerDto extends Schema
     }
 
 
-    public function getSummonerId(): int
+    public function getSummonerId(): float
     {
         return $this->summonerId;
     }
 
 
-    public function setSummonerId(int $summonerId)
+    public function setSummonerId(float $summonerId)
     {
         $this->summonerId = $summonerId;
     }

@@ -37,34 +37,10 @@ class GameApiQueryImpl extends BaseRiotApiQuery implements GameApiQuery
         $this->apiUrlBuilder->withMethod(RiotApiMethods::GET_RECENT_GAMES);
         $jsonContent = json_decode(file_get_contents($this->apiUrlBuilder->buildUrl()));
         $recentGames = array();
-        if (!is_null($jsonContent)){
-            $jsonContent = $jsonContent->{"games"};
-            foreach($jsonContent as $games){
-                $game = array();
-                foreach($games as $name => $value){
-                    if ($name == "fellowPlayers"){
-                        $fellowPlayers = array();
 
-                        foreach($games->{$name} as $summonerDatas){
-                            $datas = array();
-                            foreach($summonerDatas as $dataName => $dataValue){
-                               $datas[$dataName] = $dataValue;
-                            }
-                            array_push($fellowPlayers, new PlayerDto($datas));
-                        }
-                        $game[$name] =  $fellowPlayers;
-                    } else{
-                        $game[$name] = $value;
-                    }
-
-                }
-                array_push($recentGames, new GameDto($game));
-            }
+        foreach($jsonContent->{"games"} as $game){
+            array_push($recentGames, JsonParser::fromJson($game, "GameDto"));
         }
-        else{
-            die("No data available");
-        }
-
 
 
         return $recentGames;

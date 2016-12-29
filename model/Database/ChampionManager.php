@@ -9,7 +9,7 @@
 class ChampionManager
 {
     /**
-     * @var Instance de SPDO
+     * @var PDO Instance de PDO
      */
     private $db;
 
@@ -22,9 +22,9 @@ class ChampionManager
 
     /**
      * Ajouter un champion à la table CHAMPION_TABLE_NAME
-     * @param Champion $champion Champion à ajouter
+     * @param ChampionDto $champion Champion à ajouter
      */
-    public function add(Champion $champion){
+    public function add(ChampionDto $champion){
         $sql = "INSERT INTO " . self::CHAMPION_TABLE_NAME . '(id, name) VALUES(:id, :name)';
         $query = $this->db->prepare($sql);
         $query->bindValue(':name', $champion->getName());
@@ -33,15 +33,15 @@ class ChampionManager
     }
 
     /**
-     * @param array $champions
+     *
      */
     public function fillChampionDatabase(){
         $sqlTruncate = "TRUNCATE TABLE " . self::CHAMPION_TABLE_NAME;
         $query = $this->db->prepare($sqlTruncate);
         $query = $query->execute();
 
-        $apiManager = new StaticDataApiManager();
-        $champions = $apiManager->getChampionsId();
+        $factory = RiotApiQueryFactory::newInstance("308fdabd-0365-4103-b5ec-e8e965db5515", "euw");
+        $champions = $factory->newStaticDataApiQuery()->listChampions();
         foreach ($champions as $champion){
             $this->add($champion);
 

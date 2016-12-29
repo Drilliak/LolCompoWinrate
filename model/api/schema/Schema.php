@@ -8,26 +8,25 @@
  */
 abstract class Schema
 {
-    /**
-     * @var int the remaining number of seconds before the rate limit reset.
-     */
-    protected $retryAfter;
 
+    /* Array of the variable class types */
+    const VAR_TYPE = array();
+
+    const PRIMITIF_TYPE = "primitifType";
+
+    public static function getType(string $varName){
+        $class = get_called_class();
+        if (key_exists($varName, $class::VAR_TYPE)){
+            return $class::VAR_TYPE[$varName];
+        }
+        return $class::PRIMITIF_TYPE;
+    }
 
     protected function __construct(array $data)
     {
         $this->hydrate($data);
     }
 
-    public function setRetryAfter(int $retryAfter){
-        if ($retryAfter > 0 ){
-            $this->retryAfter = $retryAfter;
-        }
-    }
-
-    public function getRetryAfter() : int{
-        return $this->retryAfter;
-    }
 
     private function hydrate(array $data)
     {

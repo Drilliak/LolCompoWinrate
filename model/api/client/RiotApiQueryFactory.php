@@ -102,6 +102,16 @@ class RiotApiQueryFactory
     }
 
     /**
+     * New match api query.
+     *
+     * @return MatchApiQuery
+     *              the match api query.
+     */
+    public function newMatchApiQuery() : MatchApiQuery{
+        return new MatchApiQueryImpl($this->applicationKey, $this->region);
+    }
+
+    /**
      * Updates the queue.
      *
      * @param SplQueue $queue

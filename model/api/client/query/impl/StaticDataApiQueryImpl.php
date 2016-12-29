@@ -87,11 +87,7 @@ class StaticDataApiQueryImpl extends BaseRiotApiQuery implements StaticDataApiQu
         $jsonContent = $jsonContent->{"data"};
         $championsList = array();
         foreach ($jsonContent as $champion) {
-            $datas = array();
-            foreach ($champion as $key => $data) {
-                $datas[$key] = $data;
-            }
-            array_push($championsList, new ChampionDto($datas));
+            array_push($championsList, JsonParser::fromJson($champion, "ChampionDto"));
         }
 
         return $championsList;

@@ -1,13 +1,14 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Vincent
- * Date: 26/12/2016
- * Time: 21:56
+ * This object contains game information.
  */
 class GameDto extends Schema
 {
+    const VAR_TYPE = array(
+        "fellowPlayers" => "arrayPlayerDto",
+        "stats" => "RawStatsDto");
+
     /** @var int champion id associated with game */
     private $championId;
 
@@ -44,7 +45,8 @@ class GameDto extends Schema
     /** @var  int ID of the second summoner spell */
     private $spell2;
 
-    //private $stats;
+    /** @var  RawStatsDto Statistics associated with the game for this summoner. */
+    private $stats;
 
     /** @var  string Game sub-type */
     private $subType;
@@ -63,6 +65,15 @@ class GameDto extends Schema
         return $this->championId;
     }
 
+    public function getStats(): RawStatsDto
+    {
+        return $this->stats;
+    }
+
+    public function setStats(RawStatsDto $stats)
+    {
+        $this->stats = $stats;
+    }
 
     public function setChampionId(int $championId)
     {
