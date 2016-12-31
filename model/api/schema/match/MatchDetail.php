@@ -1,13 +1,18 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Vincent
- * Date: 28/12/2016
- * Time: 01:37
+ * This object contains match detail information
  */
 class MatchDetail extends Schema
 {
+
+    const VAR_TYPE = array(
+      "participantIdentities" => "arrayParticipantIdentity",
+      "participants" => "arrayParticipant",
+      "teams" => "arrayTeam",
+      "timeline" => "Timeline"
+    );
+
     /** @var  int Match map ID*/
     private $mapId;
 
@@ -31,7 +36,7 @@ class MatchDetail extends Schema
     private $participantIdentities;
 
     /** @var  array Participant information */
-    private $participants;
+    private $participants = array();
 
     /** @var  string Platform ID of the match    */
     private $platformId;

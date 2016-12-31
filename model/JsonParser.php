@@ -6,7 +6,7 @@
  * Date: 28/12/2016
  * Time: 21:37
  */
-class JsonParser
+abstract class JsonParser
 {
 
     /**

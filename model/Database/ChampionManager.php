@@ -9,7 +9,7 @@
 class ChampionManager
 {
     /**
-     * @var PDO Instance de PDO
+     * @var PDO PDO instance.
      */
     private $db;
 
@@ -23,13 +23,14 @@ class ChampionManager
     /**
      * Ajouter un champion à la table CHAMPION_TABLE_NAME
      * @param ChampionDto $champion Champion à ajouter
+     * @return bool TRUE on success or FALSE on failure.
      */
-    public function add(ChampionDto $champion){
+    public function add(ChampionDto $champion) : bool{
         $sql = "INSERT INTO " . self::CHAMPION_TABLE_NAME . '(id, name) VALUES(:id, :name)';
         $query = $this->db->prepare($sql);
         $query->bindValue(':name', $champion->getName());
         $query->bindValue(':id', $champion->getId());
-        $query->execute();
+        return $query->execute();
     }
 
     /**

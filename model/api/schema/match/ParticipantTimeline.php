@@ -1,14 +1,10 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Vincent
- * Date: 28/12/2016
- * Time: 14:33
+ *  This object contains all timeline information
  */
 class ParticipantTimeline extends Schema
 {
-    // à terminer
 
     /** Participant's lane : legal values */
     const PARTICIPANT_LANE_VALUES = array("MID", "MIDDLE", "TOP", "JUNGLE", "BOT", "BOTTOM");

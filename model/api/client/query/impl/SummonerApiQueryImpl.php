@@ -45,10 +45,13 @@ class SummonerApiQueryImpl extends BaseRiotApiQuery implements SummonerApiQuery
      */
     public function summonersList(): array
     {
+        RiotApiQueryFactory::wait();
         $this->apiUrlBuilder->withMethod(RiotApiMethods::GET_SUMMONER_BY_NAME);
         $url = $this->apiUrlBuilder->buildUrl();
 
+
         $jsonContent = json_decode(file_get_contents($url));
+
         $summonersList = array();
 
         foreach ($jsonContent as $summoner) {

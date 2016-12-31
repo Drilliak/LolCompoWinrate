@@ -1,14 +1,16 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Vincent
- * Date: 28/12/2016
- * Time: 14:28
+ * This object contains match participant information
  */
 class Participant extends Schema
 {
-
+    const VAR_TYPE = array(
+        "masteries" => "arrayMastery",
+        "runes" => "arrayRune",
+        "stats" => "ParticipantStats",
+        "timeline" =>"ParticipantTimeline"
+    );
     /** @var  int Champion ID */
     private $championId;
 
@@ -33,6 +35,9 @@ class Participant extends Schema
     /** @var  ParticipantStats Participant statistics */
     private $stats;
 
+    /** @var  int  Team ID*/
+    private $teamId;
+
     /** @var  ParticipantTimeline Timeline data. Delta fields refer to values for the specified
      * period (e.g., the gold per minute over the first 10 minutes of the game versus the second
      * 20 minutes of the game. Diffs fields refer to the deltas versus the calculated lane opponent(s).*/
@@ -52,6 +57,16 @@ class Participant extends Schema
     public function getChampionId(): int
     {
         return $this->championId;
+    }
+
+    public function getTeamId(): int
+    {
+        return $this->teamId;
+    }
+
+    public function setTeamId(int $teamId)
+    {
+        $this->teamId = $teamId;
     }
 
     public function setChampionId(int $championId)
