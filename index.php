@@ -57,5 +57,7 @@ foreach ($games as $game){
 
 }
 
+echo 'test';
+
 
 
